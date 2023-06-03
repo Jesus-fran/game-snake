@@ -1,0 +1,26 @@
+body{
+    background-color: rgb(20, 20, 20);
+}
+
+.box{
+    margin-left: 20%;
+    margin-top: 5%;
+    background-color: black;
+    width: 60vw;
+    height: 75vh;
+    color: red;
+    border: 5px;
+    border-color: rgb(116, 71, 30);
+    border-style: dashed;
+}
+
+.snake{
+    background-color: brown;
+    width: 7px;
+    height: 7px;
+    border: 1px;
+    border-color: gray;
+    border-style: solid;
+    border-radius: 4px;
+    margin-left: 4px;
+}
