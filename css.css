@@ -10,7 +10,7 @@ body{
     height: 75vh;
     color: red;
     border: 5px;
-    border-color: rgb(116, 71, 30);
+    border-color: rgb(105, 105, 105);
     border-style: dashed;
 }
 
@@ -22,5 +22,17 @@ body{
     border-color: gray;
     border-style: solid;
     border-radius: 4px;
-    margin-left: 4px;
+    margin-left: 40px;
+}
+
+
+.ball{
+    background-color: steelblue;
+    width: 12px;
+    height: 12px;
+    border-radius: 10px;
+    border: 1px;
+    border-color: steelblue;
+    border-style: solid;
+    margin: 50px;
 }
