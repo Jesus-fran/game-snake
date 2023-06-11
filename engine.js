@@ -91,6 +91,9 @@ function createCoords(max) {
         let numRandom = 999;
         while (numRandom > max) {
             numRandom = Math.round(Math.random() * 1000);
+            if (numRandom < 10) {
+                numRandom = 999;
+            }
         }
         console.log(numRandom);
         return numRandom;
@@ -99,8 +102,8 @@ function createCoords(max) {
 function drawBall() {
     lienzo.clearRect(xBall - ballRadius, yBall - ballRadius, ballRadius * 2, ballRadius * 2);
     lienzo.beginPath();
-    xBall = createCoords(820);
-    yBall = createCoords(500);
+    xBall = createCoords(810);
+    yBall = createCoords(490);
     lienzo.arc(xBall, yBall, ballRadius, 0, Math.PI * 2);
     lienzo.fillStyle = "red";
     lienzo.fill();
