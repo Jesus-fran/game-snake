@@ -2,15 +2,11 @@ body{
     background-color: rgb(20, 20, 20);
 }
 
-.box{
+.lienzo{
     margin-left: 20%;
     margin-top: 5%;
-    background-color: black;
-    width: 60vw;
-    height: 75vh;
-    color: red;
     border: 5px;
-    border-color: rgb(105, 105, 105);
+    border-color: black;
     border-style: dashed;
 }
 
@@ -35,4 +31,15 @@ body{
     border-color: steelblue;
     border-style: solid;
     margin: 50px;
+}
+
+.title{
+    color: springgreen;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-style: oblique;
+    float: left;
+    position: fixed;
+    text-decoration-line: overline;
+    text-decoration-style: dashed;
 }

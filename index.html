@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,14 +9,20 @@
     <link rel="stylesheet" href="css.css">
     <script src="assets/jquery-3.6.4.min.js"></script>
 </head>
+
 <body id="body">
-    <header></header>
+    <header>
+        <h1 class="title">The Snake</h1>
+    </header>
     <div class="container">
-        <div class="box" id="box">
-            <div class="snake" id="headSnake"></div>
+        <div class="box">
+            <canvas id="lienzo" class="lienzo" width="820" height="500">
+                Su navegador no soporta el elemento canvas.
+            </canvas>
         </div>
     </div>
     <footer></footer>
 </body>
 <script src="engine.js"></script>
+
 </html>>
