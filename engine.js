@@ -7,6 +7,7 @@ let leftPressed = false;
 let upPressed = false;
 let downPressed = false;
 let eated = false;
+let idIterval = 0;
 
 // Atributes snake
 let cords = [];
@@ -36,7 +37,7 @@ function keydownHandler(e) {
     else if (e.keyCode == 40) {
         downPressed = true;
     }
-    else if (e.keyCode == 32) {
+    else if (e.keyCode == 32 || e.keyCode == 27) {
         alert("In pause");
     }
 
@@ -88,15 +89,15 @@ function drawBody() {
 }
 
 function createCoords(max) {
-        let numRandom = 999;
-        while (numRandom > max) {
-            numRandom = Math.round(Math.random() * 1000);
-            if (numRandom < 10) {
-                numRandom = 999;
-            }
+    let numRandom = 999;
+    while (numRandom > max) {
+        numRandom = Math.round(Math.random() * 1000);
+        if (numRandom < 10) {
+            numRandom = 999;
         }
-        console.log(numRandom);
-        return numRandom;
+    }
+    console.log(numRandom);
+    return numRandom;
 }
 
 function drawBall() {
@@ -128,16 +129,17 @@ function draw() {
     }
     if (x + dx > Elementlienzo.width || x + dx < 0) {
         clearInterval(idIterval);
+        $('.game-over').show('slow');
     }
     if (y + dy > Elementlienzo.height || y + dy < 0) {
         clearInterval(idIterval);
-        
+        $('.game-over').show('slow');
     }
 
     let cordsitem = [x, y];
-    console.log("coordenadas: "+x+" - "+y +" ball: "+xBall+" - "+yBall);
-    
-    if ((xBall - x) <= ballRadius &&  (xBall - x) >= -ballRadius && (yBall - y) <= ballRadius && (yBall - y) >= -ballRadius ) {
+    console.log("coordenadas: " + x + " - " + y + " ball: " + xBall + " - " + yBall);
+
+    if ((xBall - x) <= ballRadius && (xBall - x) >= -ballRadius && (yBall - y) <= ballRadius && (yBall - y) >= -ballRadius) {
         console.log("EATED!");
         drawBall();
         eated = true;
@@ -152,5 +154,32 @@ function draw() {
 document.addEventListener("keydown", keydownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 
-setTimeout(drawBall, 500);
-let idIterval = setInterval(draw, 60);
+
+function resetGame() {
+    cords = [];
+    x = 100;
+    y = 100;
+    dx = 14;
+    dy = 0;
+    bodyRadius = 7;
+    bodies = 1;
+    contBodies = 0;
+    numBody = 0;
+    lienzo.clearRect(0, 0, Elementlienzo.width, Elementlienzo.height);
+}
+
+
+function newGame() {
+    console.log("new game!!");
+    $('.game-over').css('display', 'none');
+    resetGame();
+    setTimeout(drawBall, 500);
+    idIterval = setInterval(draw, 60);
+}
+
+function startGame() {
+    console.log("playing!!");
+    $('.play-game').css('display', 'none');
+    setTimeout(drawBall, 500);
+    idIterval = setInterval(draw, 60);
+}

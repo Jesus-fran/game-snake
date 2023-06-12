@@ -43,3 +43,81 @@ body{
     text-decoration-line: overline;
     text-decoration-style: dashed;
 }
+
+
+.game-over{
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.26);
+    width: 61%;
+    height: 76%;
+    margin-left: 20%;
+    margin-top: 5%;
+    display: none;
+}
+
+.title-game-over{
+    color: springgreen;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-style: normal;
+    text-align: center;
+    margin-top: 20%;
+}
+
+.btn-new{
+    background-color: rgb(17, 209, 113);
+    border: 0px;
+    border-radius: 2px;
+    padding: 5px;
+    font-size: larger;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    margin-left: 43%;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.btn-new:hover{
+    background-color: springgreen;
+    text-decoration-line: underline;
+    text-decoration-style: dashed;
+}
+
+
+.play-game{
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.26);
+    width: 61%;
+    height: 76%;
+    margin-left: 20%;
+    margin-top: 5%;
+    display: block;
+}
+
+.title-game-play{
+    color: springgreen;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-style: normal;
+    text-align: center;
+    margin-top: 20%;
+}
+
+.btn-play{
+    background-color: rgb(17, 209, 113);
+    border: 0px;
+    border-radius: 2px;
+    padding: 5px;
+    font-size: larger;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    margin-left: 46%;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.btn-play:hover{
+    background-color: springgreen;
+    text-decoration-line: underline;
+    text-decoration-style: dashed;
+}
