@@ -136,7 +136,7 @@ function draw() {
     drawBody();
 
     // If the snake did not eat a ball then it starts to run.
-    if (cords.length >= 20 && !eated) {
+    if (cords.length >= 3 && !eated) {
         lienzo.clearRect(cords[contBodies][0] - bodyRadius, cords[contBodies][1] - bodyRadius, bodyRadius * 2, bodyRadius * 2);
         contBodies += 1;
     } else {
