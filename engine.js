@@ -38,6 +38,7 @@ function keydownHandler(e) {
         downPressed = true;
     }
     else if (e.keyCode == 32 || e.keyCode == 27) {
+        console.log("IN PAUSE!");
         alert("In pause");
     }
 
@@ -96,7 +97,6 @@ function createCoords(max) {
             numRandom = 999;
         }
     }
-    console.log(numRandom);
     return numRandom;
 }
 
@@ -109,6 +109,7 @@ function drawBall() {
     lienzo.fillStyle = "red";
     lienzo.fill();
     lienzo.closePath();
+    console.log("BALL CREATED IN X: " + xBall +" , y: "+yBall);
 }
 
 let contBodies = 0;
@@ -119,7 +120,7 @@ function draw() {
     controllerMovement();
     drawBody();
 
-    if (cords.length >= 5 && !eated) {
+    if (cords.length >= 20 && !eated) {
         lienzo.clearRect(cords[contBodies][0] - bodyRadius, cords[contBodies][1] - bodyRadius, bodyRadius * 2, bodyRadius * 2);
         contBodies += 1;
     } else {
@@ -127,6 +128,7 @@ function draw() {
         numBody += 1;
         console.log("ONE BODY MORE!" + " TOTAL: " + numBody);
     }
+    // If snake crashes into the wall
     if (x + dx > Elementlienzo.width || x + dx < 0) {
         clearInterval(idIterval);
         $('.game-over').show('slow');
@@ -136,11 +138,11 @@ function draw() {
         $('.game-over').show('slow');
     }
 
+
     let cordsitem = [x, y];
-    console.log("coordenadas: " + x + " - " + y + " ball: " + xBall + " - " + yBall);
 
     if ((xBall - x) <= ballRadius && (xBall - x) >= -ballRadius && (yBall - y) <= ballRadius && (yBall - y) >= -ballRadius) {
-        console.log("EATED!");
+        console.log("BALL EATED! IN X: "+x+", Y: "+y);
         drawBall();
         eated = true;
     }
@@ -148,6 +150,15 @@ function draw() {
     cords.push(cordsitem);
     x += dx;
     y += dy;
+
+    for (let i = 0; i < numBody; i++) {
+        let corx = cords[(cords.length - 1) - i][0];
+        let corY = cords[(cords.length - 1) - i][1];
+        if (x == corx && y == corY) {
+            clearInterval(idIterval);
+            $('.game-over').show('slow');
+        }
+    }
 
 }
 
@@ -178,7 +189,7 @@ function newGame() {
 }
 
 function startGame() {
-    console.log("playing!!");
+    console.log("PLAYING!!");
     $('.play-game').css('display', 'none');
     setTimeout(drawBall, 500);
     idIterval = setInterval(draw, 60);
