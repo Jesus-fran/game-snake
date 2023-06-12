@@ -10,6 +10,7 @@ let eated = false;
 let idIterval = 0;
 let pausedGame = false;
 let runingGame = false;
+let score = 0;
 
 // Atributes snake
 let cords = [];
@@ -122,6 +123,10 @@ function drawBall() {
     console.log("BALL CREATED IN X: " + xBall + " , y: " + yBall);
 }
 
+function showScore(score){
+    $('#num-score').html(score);
+}
+
 let contBodies = 0;
 let numBody = 0;
 
@@ -155,6 +160,8 @@ function draw() {
         console.log("BALL EATED! IN X: " + x + ", Y: " + y);
         drawBall();
         eated = true;
+        score += 1;
+        showScore(score);
     }
 
     cords.push(cordsitem);
@@ -180,6 +187,7 @@ function gameOver() {
     clearInterval(idIterval);
     $('.game-over').show('slow');
     runingGame = false;
+    score = 0;
 }
 
 function resetGame() {
@@ -192,6 +200,8 @@ function resetGame() {
     bodies = 1;
     contBodies = 0;
     numBody = 0;
+    score = 0;
+    showScore(score);
     lienzo.clearRect(0, 0, Elementlienzo.width, Elementlienzo.height);
 }
 
@@ -211,6 +221,8 @@ function startGame() {
     setTimeout(drawBall, 500);
     idIterval = setInterval(draw, 60);
     runingGame = true;
+    score = 0;
+    showScore(score);
 }
 
 function resumeGame() {

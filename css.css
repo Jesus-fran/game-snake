@@ -159,3 +159,25 @@ body{
     text-decoration-line: underline;
     text-decoration-style: dashed;
 }
+
+.data-game{
+    position: absolute;
+    display: inline-block;
+}
+
+.score{
+    font-family: 'Courier New', Courier, monospace;
+    margin: 20px;
+    margin-top: 100px;
+}
+
+.title-score{
+    color: salmon;
+    font-weight: bold;
+    display: inline;
+}
+
+.num-score{
+    display: inline;
+    color: salmon;
+}
