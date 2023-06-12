@@ -8,6 +8,8 @@ let upPressed = false;
 let downPressed = false;
 let eated = false;
 let idIterval = 0;
+let pausedGame = false;
+let runingGame = false;
 
 // Atributes snake
 let cords = [];
@@ -37,9 +39,17 @@ function keydownHandler(e) {
     else if (e.keyCode == 40) {
         downPressed = true;
     }
-    else if (e.keyCode == 32 || e.keyCode == 27) {
-        console.log("IN PAUSE!");
-        alert("In pause");
+    else if ((e.keyCode == 32 || e.keyCode == 27) && runingGame) {
+
+        if (pausedGame) {
+            pausedGame = false;
+            resumeGame();
+        } else {
+            pausedGame = true;
+            console.log("IN PAUSE!");
+            $('.pause-game').css('display', 'block');
+            clearInterval(idIterval);
+        }
     }
 
 }
@@ -109,7 +119,7 @@ function drawBall() {
     lienzo.fillStyle = "red";
     lienzo.fill();
     lienzo.closePath();
-    console.log("BALL CREATED IN X: " + xBall +" , y: "+yBall);
+    console.log("BALL CREATED IN X: " + xBall + " , y: " + yBall);
 }
 
 let contBodies = 0;
@@ -120,6 +130,7 @@ function draw() {
     controllerMovement();
     drawBody();
 
+    // If the snake did not eat a ball then it starts to run.
     if (cords.length >= 20 && !eated) {
         lienzo.clearRect(cords[contBodies][0] - bodyRadius, cords[contBodies][1] - bodyRadius, bodyRadius * 2, bodyRadius * 2);
         contBodies += 1;
@@ -130,19 +141,18 @@ function draw() {
     }
     // If snake crashes into the wall
     if (x + dx > Elementlienzo.width || x + dx < 0) {
-        clearInterval(idIterval);
-        $('.game-over').show('slow');
+        gameOver();
     }
     if (y + dy > Elementlienzo.height || y + dy < 0) {
-        clearInterval(idIterval);
-        $('.game-over').show('slow');
+       gameOver();
     }
 
 
     let cordsitem = [x, y];
 
+    // If Snake eat one ball
     if ((xBall - x) <= ballRadius && (xBall - x) >= -ballRadius && (yBall - y) <= ballRadius && (yBall - y) >= -ballRadius) {
-        console.log("BALL EATED! IN X: "+x+", Y: "+y);
+        console.log("BALL EATED! IN X: " + x + ", Y: " + y);
         drawBall();
         eated = true;
     }
@@ -151,12 +161,12 @@ function draw() {
     x += dx;
     y += dy;
 
+    // If snake eats itself
     for (let i = 0; i < numBody; i++) {
         let corx = cords[(cords.length - 1) - i][0];
         let corY = cords[(cords.length - 1) - i][1];
         if (x == corx && y == corY) {
-            clearInterval(idIterval);
-            $('.game-over').show('slow');
+            gameOver();
         }
     }
 
@@ -165,6 +175,12 @@ function draw() {
 document.addEventListener("keydown", keydownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 
+
+function gameOver() {
+    clearInterval(idIterval);
+    $('.game-over').show('slow');
+    runingGame = false;
+}
 
 function resetGame() {
     cords = [];
@@ -186,6 +202,7 @@ function newGame() {
     resetGame();
     setTimeout(drawBall, 500);
     idIterval = setInterval(draw, 60);
+    runingGame = true;
 }
 
 function startGame() {
@@ -193,4 +210,12 @@ function startGame() {
     $('.play-game').css('display', 'none');
     setTimeout(drawBall, 500);
     idIterval = setInterval(draw, 60);
+    runingGame = true;
+}
+
+function resumeGame() {
+    console.log("RESUMED");
+    $('.pause-game').css('display', 'none');
+    idIterval = setInterval(draw, 60);
+    runingGame = true;
 }
