@@ -25,6 +25,7 @@ let cordsBall = [];
 let xBall = 200;
 let yBall = 200;
 let ballRadius = 15;
+let ballColor = "red";
 
 function keydownHandler(e) {
     console.log("PRESSED: " + e.keyCode);
@@ -111,19 +112,45 @@ function createCoords(max) {
     return numRandom;
 }
 
+function randomBall() {
+    let numRandom = 999;
+    while (numRandom > 10) {
+        numRandom = Math.round(Math.random() * 10);
+        console.log(numRandom);
+        if (numRandom >= 0 && numRandom <= 3) {
+            return 0; //ball sm
+        }
+        else if (numRandom > 3 && numRandom <= 10) {
+            return 1; //ball md
+        }
+        else {
+            numRandom = 999; //search other numRandom
+        }
+    }
+}
+
 function drawBall() {
     lienzo.clearRect(xBall - ballRadius, yBall - ballRadius, ballRadius * 2, ballRadius * 2);
     lienzo.beginPath();
     xBall = createCoords(810);
     yBall = createCoords(490);
+    let typeBall = randomBall();
+    if (typeBall == 0) {
+        ballRadius = 10;
+        ballColor = "blue";
+    }
+    else if (typeBall == 1) {
+        ballRadius = 15;
+        ballColor = "red";
+    }
     lienzo.arc(xBall, yBall, ballRadius, 0, Math.PI * 2);
-    lienzo.fillStyle = "red";
+    lienzo.fillStyle = ballColor;
     lienzo.fill();
     lienzo.closePath();
     console.log("BALL CREATED IN X: " + xBall + " , y: " + yBall);
 }
 
-function showScore(score){
+function showScore(score) {
     $('#num-score').html(score);
 }
 
@@ -149,7 +176,7 @@ function draw() {
         gameOver();
     }
     if (y + dy > Elementlienzo.height || y + dy < 0) {
-       gameOver();
+        gameOver();
     }
 
 
