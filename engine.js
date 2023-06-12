@@ -114,14 +114,17 @@ function createCoords(max) {
 
 function randomBall() {
     let numRandom = 999;
-    while (numRandom > 10) {
-        numRandom = Math.round(Math.random() * 10);
+    while (numRandom > 20) {
+        numRandom = Math.round(Math.random() * 20);
         console.log(numRandom);
-        if (numRandom >= 0 && numRandom <= 3) {
-            return 0; //ball sm
+        if (numRandom >= 0 && numRandom <= 5) {
+            return 0; //ball sm, posibility of 6
         }
-        else if (numRandom > 3 && numRandom <= 10) {
-            return 1; //ball md
+        else if (numRandom > 5 && numRandom <=17) {
+            return 1; //ball md, posibility of 12
+        }
+        else if (numRandom => 18 && numRandom <= 20) {
+            return 2; //ball lg, posibility of 3
         }
         else {
             numRandom = 999; //search other numRandom
@@ -142,6 +145,10 @@ function drawBall() {
     else if (typeBall == 1) {
         ballRadius = 15;
         ballColor = "red";
+    }
+    else if (typeBall == 2) {
+        ballRadius = 20;
+        ballColor = "springgreen";
     }
     lienzo.arc(xBall, yBall, ballRadius, 0, Math.PI * 2);
     lienzo.fillStyle = ballColor;
