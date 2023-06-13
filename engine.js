@@ -1,6 +1,19 @@
 let Elementlienzo = document.getElementById('lienzo');
 let lienzo = Elementlienzo.getContext('2d');
 
+if (!localStorage.getItem('ballmd')) {
+    localStorage.setItem('ballmd', 0);
+}
+if (!localStorage.getItem('ballsm')) {
+    localStorage.setItem('ballsm', 0);
+}
+if (!localStorage.getItem('coins')) {
+    localStorage.setItem('coins', 0);
+}
+if (!localStorage.getItem('lastscore')) {
+    localStorage.setItem('lastscore', 0);
+}
+
 // Controllers of game
 let rightPressed = false;
 let leftPressed = false;
@@ -11,6 +24,9 @@ let idIterval = 0;
 let pausedGame = false;
 let runingGame = false;
 let score = 0;
+let ballsm = parseInt(localStorage.getItem('ballsm'));
+let ballmd = parseInt(localStorage.getItem('ballmd'));
+let coins = parseInt(localStorage.getItem('coins'));
 
 // Atributes snake
 let cords = [];
@@ -120,7 +136,7 @@ function randomBall() {
         if (numRandom >= 0 && numRandom <= 5) {
             return 0; //ball sm, posibility of 6
         }
-        else if (numRandom > 5 && numRandom <=17) {
+        else if (numRandom > 5 && numRandom <= 17) {
             return 1; //ball md, posibility of 12
         }
         else if (numRandom => 18 && numRandom <= 20) {
@@ -192,10 +208,27 @@ function draw() {
     // If Snake eat one ball
     if ((xBall - x) <= ballRadius && (xBall - x) >= -ballRadius && (yBall - y) <= ballRadius && (yBall - y) >= -ballRadius) {
         console.log("BALL EATED! IN X: " + x + ", Y: " + y);
-        drawBall();
         eated = true;
         score += 1;
         showScore(score);
+        let lastScore = parseInt(localStorage.getItem('lastscore'));
+        if (lastScore < score) {
+            localStorage.setItem('lastscore', score);
+        }
+        if (ballRadius == 10) {
+            ballsm += 1;
+            localStorage.setItem('ballsm', ballsm);
+        }
+        else if (ballRadius == 15) {
+            ballmd += 1;
+            localStorage.setItem('ballmd', ballmd);
+        }
+        else if (ballRadius == 20) {
+            coins += 1;
+            localStorage.setItem('coins', coins);
+        }
+
+        drawBall();
     }
 
     cords.push(cordsitem);
