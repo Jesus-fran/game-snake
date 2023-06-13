@@ -177,6 +177,40 @@ function showScore(score) {
     $('#num-score').html(score);
 }
 
+function showMoney() {
+    let ballsmsaved = parseInt(localStorage.getItem('ballsm'));
+    let ballmdsaved = localStorage.getItem('ballmd');
+    let ballcoins = localStorage.getItem('coins');
+    
+    let cont = 0;
+    let cont1 = 0;
+    let cont2 = 0;
+
+    let intervalballsm = setInterval(() => {
+        $('#text-ballsm').html(cont);
+        if (cont >= ballsmsaved) {
+            clearInterval(intervalballsm);
+        }
+        cont += 1;
+    }, 50);
+    let intervalballmd = setInterval(() => {
+        $('#text-ballmd').html(cont1);
+        if (cont1 >= ballmdsaved) {
+            clearInterval(intervalballmd);
+        }
+        cont1 += 1;
+    }, 50);
+    let intervalballcoins = setInterval(() => {
+        $('#text-ballcoins').html(cont2);
+        if (cont2 >= ballcoins) {
+            clearInterval(intervalballcoins);
+        }
+        cont2 += 1;
+    }, 50);
+}
+
+showMoney();
+
 let contBodies = 0;
 let numBody = 0;
 
@@ -255,6 +289,7 @@ function gameOver() {
     $('.game-over').show('slow');
     runingGame = false;
     score = 0;
+    showMoney();
 }
 
 function resetGame() {
