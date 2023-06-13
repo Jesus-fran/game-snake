@@ -27,6 +27,7 @@ let score = 0;
 let ballsm = parseInt(localStorage.getItem('ballsm'));
 let ballmd = parseInt(localStorage.getItem('ballmd'));
 let coins = parseInt(localStorage.getItem('coins'));
+let lastPressed = 0;
 
 // Atributes snake
 let cords = [];
@@ -45,20 +46,24 @@ let ballColor = "red";
 
 function keydownHandler(e) {
     console.log("PRESSED: " + e.keyCode);
-    if (e.keyCode == 39) {
+    if (e.keyCode == 39 && lastPressed != 37) {
         rightPressed = true;
+        lastPressed = 39;
     }
-    else if (e.keyCode == 37) {
+    else if (e.keyCode == 37 && lastPressed != 39) {
         leftPressed = true;
+        lastPressed = 37;
     }
-    else if (e.keyCode == 38) {
+    else if (e.keyCode == 38 && lastPressed != 40) {
         upPressed = true
+        lastPressed = 38;
     }
-    else if (e.keyCode == 40) {
+    else if (e.keyCode == 40 && lastPressed != 38) {
         downPressed = true;
+        lastPressed = 40;
     }
     else if ((e.keyCode == 32 || e.keyCode == 27) && runingGame) {
-
+        // key to pause the game
         if (pausedGame) {
             pausedGame = false;
             resumeGame();
@@ -288,6 +293,7 @@ function gameOver() {
     clearInterval(idIterval);
     $('.game-over').show('slow');
     runingGame = false;
+    lastPressed = 0;
     score = 0;
     showMoney();
 }
@@ -303,6 +309,7 @@ function resetGame() {
     contBodies = 0;
     numBody = 0;
     score = 0;
+    leftPressed = 0;
     showScore(score);
     lienzo.clearRect(0, 0, Elementlienzo.width, Elementlienzo.height);
 }
