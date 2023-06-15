@@ -224,7 +224,7 @@ function showSummary() {
     console.log(lastScore);
     console.log(score);
     if (lastScore < score) {
-        $('#new-score-summ').css('display','block');
+        $('#new-score-summ').css('display', 'block');
     }
     $('#summ-num-sm').html('+' + ballsmTemp);
     $('#summ-num-md').html('+' + ballmdTemp);
@@ -234,32 +234,7 @@ function showSummary() {
 let contBodies = 0;
 let numBody = 0;
 
-function draw() {
-
-    controllerMovement();
-    drawBody();
-
-    // If the snake did not eat a ball then it starts to run.
-    if (cords.length >= 3 && !eated) {
-        lienzo.clearRect(cords[contBodies][0] - bodyRadius, cords[contBodies][1] - bodyRadius, bodyRadius * 2, bodyRadius * 2);
-        contBodies += 1;
-    } else {
-        eated = false;
-        numBody += 1;
-        console.log("ONE BODY MORE!" + " TOTAL: " + numBody);
-    }
-    // If snake crashes into the wall
-    if (x + dx > Elementlienzo.width || x + dx < 0) {
-        gameOver();
-    }
-    if (y + dy > Elementlienzo.height || y + dy < 0) {
-        gameOver();
-    }
-
-
-    let cordsitem = [x, y];
-
-    // If Snake eat one ball
+function snakeEated() {
     if ((xBall - x) <= ballRadius && (xBall - x) >= -ballRadius && (yBall - y) <= ballRadius && (yBall - y) >= -ballRadius) {
         console.log("BALL EATED! IN X: " + x + ", Y: " + y);
         eated = true;
@@ -287,6 +262,34 @@ function draw() {
 
         drawBall();
     }
+}
+
+function draw() {
+
+    controllerMovement();
+    drawBody();
+
+    // If the snake did not eat a ball then it starts to run.
+    if (cords.length >= 3 && !eated) {
+        lienzo.clearRect(cords[contBodies][0] - bodyRadius, cords[contBodies][1] - bodyRadius, bodyRadius * 2, bodyRadius * 2);
+        contBodies += 1;
+    } else {
+        eated = false;
+        numBody += 1;
+        console.log("ONE BODY MORE!" + " TOTAL: " + numBody);
+    }
+    // If snake crashes into the wall
+    if (x + dx > Elementlienzo.width || x + dx < 0) {
+        gameOver();
+    }
+    if (y + dy > Elementlienzo.height || y + dy < 0) {
+        gameOver();
+    }
+
+    let cordsitem = [x, y];
+
+    // If Snake eat one ball
+    snakeEated();
 
     cords.push(cordsitem);
     x += dx;
@@ -300,7 +303,6 @@ function draw() {
             gameOver();
         }
     }
-
 }
 
 document.addEventListener("keydown", keydownHandler, false);
