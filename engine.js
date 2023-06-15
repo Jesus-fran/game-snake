@@ -27,7 +27,11 @@ let score = 0;
 let ballsm = parseInt(localStorage.getItem('ballsm'));
 let ballmd = parseInt(localStorage.getItem('ballmd'));
 let coins = parseInt(localStorage.getItem('coins'));
+let ballsmTemp = 0;
+let ballmdTemp = 0;
+let coinsTemp = 0;
 let lastPressed = 0;
+let lastScore = 0;
 
 // Atributes snake
 let cords = [];
@@ -186,7 +190,7 @@ function showMoney() {
     let ballsmsaved = parseInt(localStorage.getItem('ballsm'));
     let ballmdsaved = localStorage.getItem('ballmd');
     let ballcoins = localStorage.getItem('coins');
-    
+
     let cont = 0;
     let cont1 = 0;
     let cont2 = 0;
@@ -215,6 +219,17 @@ function showMoney() {
 }
 
 showMoney();
+
+function showSummary() {
+    console.log(lastScore);
+    console.log(score);
+    if (lastScore < score) {
+        $('#new-score-summ').css('display','block');
+    }
+    $('#summ-num-sm').html('+' + ballsmTemp);
+    $('#summ-num-md').html('+' + ballmdTemp);
+    $('#summ-num-coins').html('+' + coinsTemp);
+}
 
 let contBodies = 0;
 let numBody = 0;
@@ -250,20 +265,23 @@ function draw() {
         eated = true;
         score += 1;
         showScore(score);
-        let lastScore = parseInt(localStorage.getItem('lastscore'));
+        lastScore = parseInt(localStorage.getItem('lastscore'));
         if (lastScore < score) {
             localStorage.setItem('lastscore', score);
         }
         if (ballRadius == 10) {
             ballsm += 1;
+            ballsmTemp += 1;
             localStorage.setItem('ballsm', ballsm);
         }
         else if (ballRadius == 15) {
             ballmd += 1;
+            ballmdTemp += 1;
             localStorage.setItem('ballmd', ballmd);
         }
         else if (ballRadius == 20) {
             coins += 1;
+            coinsTemp += 1;
             localStorage.setItem('coins', coins);
         }
 
@@ -294,7 +312,11 @@ function gameOver() {
     $('.game-over').show('slow');
     runingGame = false;
     lastPressed = 0;
+    showSummary();
     score = 0;
+    ballsmTemp = 0;
+    ballmdTemp = 0;
+    coinsTemp = 0;
     showMoney();
 }
 
@@ -312,6 +334,7 @@ function resetGame() {
     leftPressed = 0;
     showScore(score);
     lienzo.clearRect(0, 0, Elementlienzo.width, Elementlienzo.height);
+    $('#new-score-summ').css('display', 'none');
 }
 
 
@@ -327,6 +350,7 @@ function newGame() {
 function startGame() {
     console.log("PLAYING!!");
     $('.play-game').css('display', 'none');
+    $('#new-score-summ').css('display', 'none');
     setTimeout(drawBall, 500);
     idIterval = setInterval(draw, 60);
     runingGame = true;

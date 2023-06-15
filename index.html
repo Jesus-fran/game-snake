@@ -15,7 +15,7 @@
         <h1 class="title">The Snake</h1>
     </header>
     <div class="container">
-        
+
         <div class="play-game">
             <h1 class="title-game-play">Play game</h1>
             <button type="button" class="btn-play" id="btn-play" onclick="startGame()">Play</button>
@@ -25,9 +25,42 @@
             <h1 class="title-game-pause">Paused game</h1>
             <button type="button" class="btn-resume" id="btn-resume" onclick="resumeGame()">Resume</button>
         </div>
-        
+
         <div class="game-over">
             <h1 class="title-game-over">Game over</h1>
+            <div class="summary">
+                <h2 class="new-score-summ" id="new-score-summ">¡New score!</h2>
+                <table class="table-summary">
+                    <caption>
+                        <h5 class="text-summary">summary:</h5>
+                    </caption>
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="sum-ballsm" id="sum-ballsm"></div>
+                            </th>
+                            <th>
+                                <div class="sum-ballmd" id="sum-ballmd"></div>
+                            </th>
+                            <th>
+                                <div class="sum-ballcoins" id="sum-ballcoins"></div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="summ-num-sm"></td>
+                            <td id="summ-num-md"></td>
+                            <td id="summ-num-coins"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <button type="button" class="btn-new" id="btn-new" onclick="newGame()">New game</button>
         </div>
 
@@ -35,9 +68,21 @@
             Su navegador no soporta el elemento canvas.
         </canvas>
         <div class="data-game">
-            <div class="score"><h3 class="title-score">Score: </h3><h3 class="num-score" id="num-score">0</h3></div>
-            <div class="money"> <div class="ballsm" id="ballsm"></div><div class="ballmd" id="ballmd"></div><div class="ballcoins" id="ballcoins"></div></div>
-            <div class="text-money"> <div class="text-ballsm" id="text-ballsm"></div><div class="text-ballmd" id="text-ballmd"></div><div class="text-ballcoins" id="text-ballcoins"></div></div>
+            <div class="score">
+                <h3 class="title-score">Score: </h3>
+                <h3 class="num-score" id="num-score">0</h3>
+            </div>
+            <div class="money">
+                <div class="ballsm" id="ballsm"></div>
+                <div class="ballmd" id="ballmd"></div>
+                <div class="ballcoins" id="ballcoins"></div>
+            </div>
+
+            <div class="text-money">
+                <div class="text-ballsm" id="text-ballsm"></div>
+                <div class="text-ballmd" id="text-ballmd"></div>
+                <div class="text-ballcoins" id="text-ballcoins"></div>
+            </div>
         </div>
 
     </div>

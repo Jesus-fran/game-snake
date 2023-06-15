@@ -1,8 +1,8 @@
-body{
+body {
     background-color: rgb(20, 20, 20);
 }
 
-.lienzo{
+.lienzo {
     margin-left: 20%;
     margin-top: 5%;
     border: 5px;
@@ -10,7 +10,7 @@ body{
     border-style: dashed;
 }
 
-.snake{
+.snake {
     background-color: brown;
     width: 7px;
     height: 7px;
@@ -22,7 +22,7 @@ body{
 }
 
 
-.ball{
+.ball {
     background-color: steelblue;
     width: 12px;
     height: 12px;
@@ -33,7 +33,7 @@ body{
     margin: 50px;
 }
 
-.title{
+.title {
     color: springgreen;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
@@ -45,26 +45,26 @@ body{
 }
 
 
-.game-over{
+.game-over {
     position: fixed;
-    background-color: rgba(0, 0, 0, 0.26);
+    background-color: rgba(0, 0, 0, 0.473);
     width: 61%;
     height: 76%;
     margin-left: 20%;
-    margin-top: 5%;
+    margin-top: 4%;
     display: none;
 }
 
-.title-game-over{
+.title-game-over {
     color: springgreen;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
     font-style: normal;
     text-align: center;
-    margin-top: 20%;
+    margin-top: 15%;
 }
 
-.btn-new{
+.btn-new {
     background-color: rgb(17, 209, 113);
     border: 0px;
     border-radius: 2px;
@@ -77,14 +77,14 @@ body{
     cursor: pointer;
 }
 
-.btn-new:hover{
+.btn-new:hover {
     background-color: springgreen;
     text-decoration-line: underline;
     text-decoration-style: dashed;
 }
 
 
-.play-game{
+.play-game {
     position: fixed;
     background-color: rgba(0, 0, 0, 0.26);
     width: 61%;
@@ -94,7 +94,7 @@ body{
     display: block;
 }
 
-.title-game-play{
+.title-game-play {
     color: springgreen;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
@@ -103,7 +103,7 @@ body{
     margin-top: 20%;
 }
 
-.btn-play{
+.btn-play {
     background-color: rgb(17, 209, 113);
     border: 0px;
     border-radius: 2px;
@@ -116,13 +116,13 @@ body{
     cursor: pointer;
 }
 
-.btn-play:hover{
+.btn-play:hover {
     background-color: springgreen;
     text-decoration-line: underline;
     text-decoration-style: dashed;
 }
 
-.pause-game{
+.pause-game {
     position: fixed;
     background-color: rgba(0, 0, 0, 0.26);
     width: 61%;
@@ -132,7 +132,7 @@ body{
     display: none;
 }
 
-.title-game-pause{
+.title-game-pause {
     color: springgreen;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
@@ -141,7 +141,7 @@ body{
     margin-top: 20%;
 }
 
-.btn-resume{
+.btn-resume {
     background-color: rgb(17, 209, 113);
     border: 0px;
     border-radius: 2px;
@@ -154,40 +154,39 @@ body{
     cursor: pointer;
 }
 
-.btn-resume:hover{
+.btn-resume:hover {
     background-color: springgreen;
     text-decoration-line: underline;
     text-decoration-style: dashed;
 }
 
-.data-game{
+.data-game {
     position: absolute;
     display: inline-block;
 }
 
-.score{
+.score {
     font-family: 'Courier New', Courier, monospace;
     margin: 20px;
     margin-top: 100px;
 }
 
-.title-score{
+.title-score {
     color: salmon;
     font-weight: bold;
     display: inline;
 }
 
-.num-score{
+.num-score {
     display: inline;
     color: salmon;
 }
 
-.money{
+.money {
     margin-left: 10px;
 }
 
-
-.ballsm{
+.ballsm {
     display: inline-block;
     background-color: rgb(12, 12, 180);
     width: 30px;
@@ -196,7 +195,7 @@ body{
     margin: 10px;
 }
 
-.ballmd{
+.ballmd {
     display: inline-block;
     background-color: rgb(199, 16, 16);
     width: 30px;
@@ -207,7 +206,7 @@ body{
 }
 
 
-.ballcoins{
+.ballcoins {
     display: inline-block;
     background-color: springgreen;
     width: 30px;
@@ -217,7 +216,7 @@ body{
     margin-left: 15px;
 }
 
-.text-money{
+.text-money {
     margin-left: 10px;
     font-size: larger;
     text-align: center;
@@ -225,9 +224,64 @@ body{
     font-weight: bold;
 }
 
-.text-ballsm, .text-ballmd, .text-ballcoins {
+.text-ballsm,
+.text-ballmd,
+.text-ballcoins {
     color: white;
     display: inline-block;
     margin: 15px;
     margin-top: 0px;
+}
+
+.new-score-summ {
+    color: yellow;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    display: none;
+}
+.summary{
+    margin-bottom: 3%;
+}
+
+.text-summary {
+    color: rgb(160, 160, 160);
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+}
+
+.table-summary {
+    color: white;
+    text-align: center;
+    margin-left: 40%;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.sum-ballsm {
+    display: inline-block;
+    background-color: rgb(12, 12, 180);
+    width: 20px;
+    height: 20px;
+    border-radius: 30px;
+    margin: 10px;
+}
+
+.sum-ballmd {
+    display: inline-block;
+    background-color: rgb(199, 16, 16);
+    width: 20px;
+    height: 20px;
+    border-radius: 30px;
+    margin: 10px;
+    margin-left: 15px;
+}
+
+
+.sum-ballcoins {
+    display: inline-block;
+    background-color: springgreen;
+    width: 20px;
+    height: 20px;
+    border-radius: 30px;
+    margin: 10px;
+    margin-left: 15px;
 }
