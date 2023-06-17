@@ -32,6 +32,7 @@ let ballmdTemp = 0;
 let coinsTemp = 0;
 let lastPressed = 0;
 let lastScore = 0;
+let directionSnake = "";
 
 // Atributes snake
 let cords = [];
@@ -40,6 +41,14 @@ let y = 100;
 let dx = 14;
 let dy = 0;
 let bodyRadius = 7;
+
+//Atributes head snake
+let xhead = 0;
+let yhead = 0;
+let headRadius = 7;
+let headColor = "green";
+let eyesColor = "black";
+let eyesRadius = 2;
 
 // Atributes ball
 let cordsBall = [];
@@ -97,21 +106,25 @@ function keyUpHandler(e) {
 }
 
 function controllerMovement() {
-    if (rightPressed) {
+    if (rightPressed && !pausedGame) {
         dx = 14;
         dy = 0;
+        directionSnake = "right";
     }
-    if (leftPressed) {
+    if (leftPressed && !pausedGame) {
         dx = -14;
         dy = 0;
+        directionSnake = "left"
     }
-    if (upPressed) {
+    if (upPressed && !pausedGame) {
         dy = -14;
         dx = 0;
+        directionSnake = "up"
     }
-    if (downPressed) {
+    if (downPressed && !pausedGame) {
         dy = 14;
         dx = 0;
+        directionSnake = "down"
     }
 }
 
@@ -264,15 +277,62 @@ function snakeEated() {
     }
 }
 
+function rightLeftEyes() {
+    lienzo.beginPath();
+    lienzo.arc(x, y - (headRadius / 2), eyesRadius, 0, Math.PI * 2);
+    lienzo.fillStyle = eyesColor;
+    lienzo.fill();
+    lienzo.closePath();
+
+    lienzo.beginPath();
+    lienzo.arc(x, y + (headRadius / 2), eyesRadius, 0, Math.PI * 2);
+    lienzo.fillStyle = eyesColor;
+    lienzo.fill();
+    lienzo.closePath();
+}
+
+function downUpEyes() {
+    lienzo.beginPath();
+    lienzo.arc(x - headRadius + (headRadius/2), y, eyesRadius, 0, Math.PI * 2);
+    lienzo.fillStyle = eyesColor;
+    lienzo.fill();
+    lienzo.closePath();
+
+    lienzo.beginPath();
+    lienzo.arc(x + (headRadius /2), y, eyesRadius, 0, Math.PI * 2);
+    lienzo.fillStyle = eyesColor;
+    lienzo.fill();
+    lienzo.closePath();
+}
+
+function drawHead() {
+
+    lienzo.beginPath();
+    lienzo.arc(x, y, headRadius, 0, Math.PI * 2);
+    lienzo.fillStyle = headColor;
+    lienzo.fill();
+    lienzo.closePath();
+
+    // Draw eyes
+    if (directionSnake == "right" || directionSnake == "left") {
+        rightLeftEyes();
+    }
+    else if(directionSnake == "up" || directionSnake == "down"){
+        downUpEyes();
+    }
+}
+
 function draw() {
 
     controllerMovement();
     drawBody();
 
     // If the snake did not eat a ball then it starts to run.
+    //Access the first body that stayed as a tail and eliminates it.
     if (cords.length >= 3 && !eated) {
         lienzo.clearRect(cords[contBodies][0] - bodyRadius, cords[contBodies][1] - bodyRadius, bodyRadius * 2, bodyRadius * 2);
         contBodies += 1;
+
     } else {
         eated = false;
         numBody += 1;
@@ -295,14 +355,18 @@ function draw() {
     x += dx;
     y += dy;
 
+
     // If snake eats itself
     for (let i = 0; i < numBody; i++) {
         let corx = cords[(cords.length - 1) - i][0];
         let corY = cords[(cords.length - 1) - i][1];
         if (x == corx && y == corY) {
+            eyesRadius = 3;
             gameOver();
         }
     }
+
+    drawHead();
 }
 
 document.addEventListener("keydown", keydownHandler, false);
@@ -334,6 +398,8 @@ function resetGame() {
     numBody = 0;
     score = 0;
     leftPressed = 0;
+    directionSnake = "right";
+    eyesRadius = 2;
     showScore(score);
     lienzo.clearRect(0, 0, Elementlienzo.width, Elementlienzo.height);
     $('#new-score-summ').css('display', 'none');
@@ -353,6 +419,8 @@ function startGame() {
     console.log("PLAYING!!");
     $('.play-game').css('display', 'none');
     $('#new-score-summ').css('display', 'none');
+    directionSnake = "right";
+    eyesRadius = 2;
     setTimeout(drawBall, 500);
     idIterval = setInterval(draw, 60);
     runingGame = true;
