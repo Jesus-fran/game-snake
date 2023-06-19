@@ -449,6 +449,7 @@ function startGame() {
 }
 
 function resumeGame() {
+    pausedGame = false;
     clearInterval(intervalControllers);
     console.log("RESUMED");
     $('.pause-game').css('display', 'none');
