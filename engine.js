@@ -32,7 +32,8 @@ let ballmdTemp = 0;
 let coinsTemp = 0;
 let lastPressed = 0;
 let lastScore = 0;
-let directionSnake = "";
+let intervalControllers = 0;
+let controllersVelocity = 30;
 
 // Atributes snake
 let cords = [];
@@ -41,6 +42,9 @@ let y = 100;
 let dx = 14;
 let dy = 0;
 let bodyRadius = 7;
+let directionSnake = "";
+let intervalVelocity = 100; //45,50,60,70,80,90,100,120,130,140,150
+
 
 //Atributes head snake
 let xhead = 0;
@@ -333,7 +337,6 @@ function drawHead() {
 
 function draw() {
 
-    controllerMovement();
     drawBody();
 
     // If the snake did not eat a ball then it starts to run.
@@ -383,6 +386,7 @@ document.addEventListener("keyup", keyUpHandler, false);
 
 
 function gameOver() {
+    clearInterval(intervalControllers);
     clearInterval(idIterval);
     $('.game-over').show('slow');
     runingGame = false;
@@ -409,6 +413,7 @@ function resetGame() {
     leftPressed = 0;
     directionSnake = "right";
     eyesRadius = 2;
+    clearInterval(intervalControllers);
     showScore(score);
     lienzo.clearRect(0, 0, Elementlienzo.width, Elementlienzo.height);
     $('#new-score-summ').css('display', 'none');
@@ -420,7 +425,10 @@ function newGame() {
     $('.game-over').css('display', 'none');
     resetGame();
     setTimeout(drawBall, 500);
-    idIterval = setInterval(draw, 60);
+    intervalControllers = setInterval(() => {
+        controllerMovement();
+    }, controllersVelocity);
+    idIterval = setInterval(draw, intervalVelocity);
     runingGame = true;
 }
 
@@ -431,15 +439,22 @@ function startGame() {
     directionSnake = "right";
     eyesRadius = 2;
     setTimeout(drawBall, 500);
-    idIterval = setInterval(draw, 60);
+    intervalControllers = setInterval(() => {
+        controllerMovement();
+    }, controllersVelocity);
+    idIterval = setInterval(draw, intervalVelocity);
     runingGame = true;
     score = 0;
     showScore(score);
 }
 
 function resumeGame() {
+    clearInterval(intervalControllers);
     console.log("RESUMED");
     $('.pause-game').css('display', 'none');
-    idIterval = setInterval(draw, 60);
+    intervalControllers = setInterval(() => {
+        controllerMovement();
+    }, controllersVelocity);
+    idIterval = setInterval(draw, intervalVelocity);
     runingGame = true;
 }
