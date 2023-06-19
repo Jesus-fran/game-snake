@@ -193,6 +193,15 @@ function drawBall() {
     lienzo.fill();
     lienzo.closePath();
     console.log("BALL CREATED IN X: " + xBall + " , y: " + yBall);
+    setTimeout(() => {
+        lienzo.clearRect(xBall - ballRadius, yBall - ballRadius, ballRadius * 2, ballRadius * 2);
+    }, 200);
+    setTimeout(() => {
+        lienzo.arc(xBall, yBall, ballRadius, 0, Math.PI * 2);
+        lienzo.fillStyle = ballColor;
+        lienzo.fill();
+        lienzo.closePath();
+    }, 400);
 }
 
 function showScore(score) {
@@ -293,13 +302,13 @@ function rightLeftEyes() {
 
 function downUpEyes() {
     lienzo.beginPath();
-    lienzo.arc(x - headRadius + (headRadius/2), y, eyesRadius, 0, Math.PI * 2);
+    lienzo.arc(x - headRadius + (headRadius / 2), y, eyesRadius, 0, Math.PI * 2);
     lienzo.fillStyle = eyesColor;
     lienzo.fill();
     lienzo.closePath();
 
     lienzo.beginPath();
-    lienzo.arc(x + (headRadius /2), y, eyesRadius, 0, Math.PI * 2);
+    lienzo.arc(x + (headRadius / 2), y, eyesRadius, 0, Math.PI * 2);
     lienzo.fillStyle = eyesColor;
     lienzo.fill();
     lienzo.closePath();
@@ -317,7 +326,7 @@ function drawHead() {
     if (directionSnake == "right" || directionSnake == "left") {
         rightLeftEyes();
     }
-    else if(directionSnake == "up" || directionSnake == "down"){
+    else if (directionSnake == "up" || directionSnake == "down") {
         downUpEyes();
     }
 }
