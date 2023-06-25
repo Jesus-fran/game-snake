@@ -63,7 +63,12 @@
             </div>
             <button type="button" class="btn-new" id="btn-new" onclick="newGame()">New game</button>
         </div>
-
+        <div class="settings">
+            <h5 class="title-settings">Settings</h5>
+            <label for="velocity">Velocity:</label>
+            <input type="range" name="velocity" id="inputVelocity" value="6" min="0" max="12" onchange="changeVelocity(this)">
+            <button type="button" class="btnSaveSettings" id="btnSaveSettings" onclick="saveSettings(this)">Save</button>
+        </div>
         <canvas id="lienzo" class="lienzo" width="820" height="500">
             Su navegador no soporta el elemento canvas.
         </canvas>

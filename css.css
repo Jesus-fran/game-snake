@@ -160,6 +160,34 @@ body {
     text-decoration-style: dashed;
 }
 
+
+.settings{
+    position: absolute;
+    display: block;
+    margin-top: 6%;
+    color: white;
+    font-size: x-small;
+    font-family: 'Courier New', Courier, monospace;
+    /* background-color: red; */
+}
+
+.title-settings{
+    text-align: center;
+}
+
+.btnSaveSettings{
+    display: block;
+    margin-left: 25%;
+    margin-top: 10%;
+    background-color: gray;
+    border: 0;
+    border-radius: 5px;
+}
+
+label{
+    display: block;
+}
+
 .data-game {
     position: absolute;
     display: inline-block;
