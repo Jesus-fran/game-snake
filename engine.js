@@ -14,6 +14,10 @@ if (!localStorage.getItem('lastscore')) {
     localStorage.setItem('lastscore', 0);
 }
 
+if (!localStorage.getItem('velocity')) {
+    localStorage.setItem('velocity', 100);
+}
+
 // Controllers of game
 let rightPressed = false;
 let leftPressed = false;
@@ -43,8 +47,9 @@ let dx = 14;
 let dy = 0;
 let bodyRadius = 7;
 let directionSnake = "";
-let intervalVelocity = 100; //45,50,60,70,80,90,100,120,130,140,150
-
+let arrVelocity = [170, 160, 150, 140, 130, 120, 100, 90, 80, 70, 60, 50, 40];
+let intervalVelocity = parseInt(localStorage.getItem('velocity'));
+$('#inputVelocity').val(arrVelocity.indexOf(intervalVelocity));
 
 //Atributes head snake
 let xhead = 0;
@@ -60,6 +65,13 @@ let xBall = 200;
 let yBall = 200;
 let ballRadius = 15;
 let ballColor = "red";
+
+function pauseGame() {
+    pausedGame = true;
+    console.log("IN PAUSE!");
+    $('.pause-game').css('display', 'block');
+    clearInterval(idIterval);
+}
 
 function keydownHandler(e) {
     console.log("PRESSED: " + e.keyCode);
@@ -85,10 +97,7 @@ function keydownHandler(e) {
             pausedGame = false;
             resumeGame();
         } else {
-            pausedGame = true;
-            console.log("IN PAUSE!");
-            $('.pause-game').css('display', 'block');
-            clearInterval(idIterval);
+            pauseGame();
         }
     }
 
@@ -458,4 +467,28 @@ function resumeGame() {
     }, controllersVelocity);
     idIterval = setInterval(draw, intervalVelocity);
     runingGame = true;
+}
+
+function modifiedSetting() {
+    $('#btnSaveSettings').css('background-color', 'rgb(219, 219, 219)');
+    $('#btnSaveSettings').css('cursor', 'pointer');
+}
+
+function changeVelocity(element) {
+    const inputVelocity = $(element).val();
+    $('#btnSaveSettings').data('velocity', arrVelocity[parseInt(inputVelocity)]);
+    modifiedSetting();
+}
+
+function saveSettings(element) {
+    if ($(element).data('velocity') != undefined) {
+        let newVelocity = $(element).data('velocity');
+        intervalVelocity = parseInt(newVelocity);
+        localStorage.setItem('velocity', intervalVelocity);
+        if (runingGame) {
+            pauseGame();
+        }
+        $('#btnSaveSettings').css('background-color', 'gray');
+        $('#btnSaveSettings').css('cursor', 'default');
+    }
 }
