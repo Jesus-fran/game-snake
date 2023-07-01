@@ -178,7 +178,7 @@ function randomBall() {
         else if (numRandom > 5 && numRandom <= 17) {
             return 1; //ball md, posibility of 12
         }
-        else if (numRandom => 18 && numRandom <= 20) {
+        else if (numRandom >= 18 && numRandom <= 20) {
             return 2; //ball lg, posibility of 3
         }
         else {
