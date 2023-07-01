@@ -65,12 +65,16 @@ let xBall = 200;
 let yBall = 200;
 let ballRadius = 15;
 let ballColor = "red";
+let lifeBall = 0;
+let contLifeBall = 0;
+
 
 function pauseGame() {
     pausedGame = true;
     console.log("IN PAUSE!");
     $('.pause-game').css('display', 'block');
     clearInterval(idIterval);
+    clearInterval(lifeBall);
 }
 
 function keydownHandler(e) {
@@ -183,6 +187,22 @@ function randomBall() {
     }
 }
 
+function showLifeBall() {
+    lifeBall = setInterval(() => {
+        $('#life-ball').css('display', 'block');
+        const width = 100 - contLifeBall;
+        $('#bar-life-ball').css('width', width + "%");
+        // 7 seconds
+        if (contLifeBall >= 100) {
+            contLifeBall = 0;
+            clearInterval(lifeBall);
+            drawBall();
+            $('#life-ball').css('display', 'none');
+        }
+        contLifeBall += 1;
+    }, 70); //7,000ms / 100 = 70ms
+}
+
 function drawBall() {
     lienzo.clearRect(xBall - ballRadius, yBall - ballRadius, ballRadius * 2, ballRadius * 2);
     lienzo.beginPath();
@@ -200,6 +220,7 @@ function drawBall() {
     else if (typeBall == 2) {
         ballRadius = 20;
         ballColor = "springgreen";
+        showLifeBall();
     }
     lienzo.arc(xBall, yBall, ballRadius, 0, Math.PI * 2);
     lienzo.fillStyle = ballColor;
@@ -294,7 +315,9 @@ function snakeEated() {
             coinsTemp += 1;
             localStorage.setItem('coins', coins);
         }
-
+        clearInterval(lifeBall);
+        contLifeBall = 0;
+        $('#life-ball').css('display', 'none');
         drawBall();
     }
 }
@@ -466,6 +489,9 @@ function resumeGame() {
         controllerMovement();
     }, controllersVelocity);
     idIterval = setInterval(draw, intervalVelocity);
+    if (contLifeBall != 0) {
+        showLifeBall();
+    }
     runingGame = true;
 }
 

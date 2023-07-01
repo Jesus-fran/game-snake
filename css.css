@@ -161,7 +161,7 @@ body {
 }
 
 
-.settings{
+.settings {
     position: absolute;
     display: block;
     margin-top: 6%;
@@ -171,11 +171,11 @@ body {
     /* background-color: red; */
 }
 
-.title-settings{
+.title-settings {
     text-align: center;
 }
 
-.btnSaveSettings{
+.btnSaveSettings {
     display: block;
     margin-left: 25%;
     margin-top: 10%;
@@ -184,7 +184,7 @@ body {
     border-radius: 5px;
 }
 
-label{
+label {
     display: block;
 }
 
@@ -245,11 +245,13 @@ label{
 }
 
 .text-money {
+    position: fixed;
     margin-left: 10px;
     font-size: larger;
     text-align: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: bold;
+    height: 50px;
 }
 
 .text-ballsm,
@@ -267,7 +269,8 @@ label{
     text-align: center;
     display: none;
 }
-.summary{
+
+.summary {
     margin-bottom: 3%;
 }
 
@@ -312,4 +315,36 @@ label{
     border-radius: 30px;
     margin: 10px;
     margin-left: 15px;
+}
+
+.div-progress {
+    margin-top: 50%;
+    margin-left: 15px;
+}
+
+.progress {
+
+    color: white;
+    background-color: black;
+    height: 20px;
+}
+
+.bar-progress {
+    width: 50%;
+    background-color: mediumslateblue;
+    height: 20px;
+}
+
+.life-ball {
+    display: none;
+    margin-top: 10%;
+    color: white;
+    background-color: black;
+    height: 20px;
+}
+
+.bar-life-ball {
+    width: 100%;
+    background-color: springgreen;
+    height: 20px;
 }
