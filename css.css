@@ -330,7 +330,7 @@ label {
 }
 
 .bar-progress {
-    width: 50%;
+    width: 0%;
     background-color: mediumslateblue;
     height: 20px;
 }
@@ -347,4 +347,42 @@ label {
     width: 100%;
     background-color: springgreen;
     height: 20px;
+}
+
+.level-completed {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.473);
+    width: 61%;
+    height: 76%;
+    margin-left: 20%;
+    margin-top: 4%;
+    display: none;
+}
+
+.title-level-completed {
+    color: springgreen;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-style: normal;
+    text-align: center;
+    margin-top: 15%;
+}
+
+.btn-next {
+    background-color: rgb(17, 209, 113);
+    border: 0px;
+    border-radius: 2px;
+    padding: 5px;
+    font-size: larger;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    margin-left: 43%;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.btn-next:hover {
+    background-color: springgreen;
+    text-decoration-line: underline;
+    text-decoration-style: dashed;
 }

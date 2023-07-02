@@ -38,6 +38,7 @@ let lastPressed = 0;
 let lastScore = 0;
 let intervalControllers = 0;
 let controllersVelocity = 30;
+let ballsLevel = 5;
 
 // Atributes snake
 let cords = [];
@@ -296,6 +297,8 @@ function snakeEated() {
         eated = true;
         score += 1;
         showScore(score);
+        let width = (score * (100 / ballsLevel));
+        $('#bar-progress').css('width', width + "%");
         lastScore = parseInt(localStorage.getItem('lastscore'));
         if (lastScore < score) {
             localStorage.setItem('lastscore', score);
@@ -367,6 +370,20 @@ function drawHead() {
     }
 }
 
+function levelCompleted() {
+    console.log("LEVEL COMPLETED!");
+    clearInterval(intervalControllers);
+    clearInterval(idIterval);
+    $('.level-completed').show('slow');
+    runingGame = false;
+    lastPressed = 0;
+    score = 0;
+    ballsmTemp = 0;
+    ballmdTemp = 0;
+    coinsTemp = 0;
+    showMoney(); 
+}
+
 function draw() {
 
     drawBody();
@@ -411,6 +428,9 @@ function draw() {
     }
 
     drawHead();
+    if (score >= ballsLevel) {
+        levelCompleted();
+    }
 }
 
 document.addEventListener("keydown", keydownHandler, false);
