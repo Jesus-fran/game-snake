@@ -381,7 +381,7 @@ function levelCompleted() {
     ballsmTemp = 0;
     ballmdTemp = 0;
     coinsTemp = 0;
-    showMoney(); 
+    showMoney();
 }
 
 function draw() {
@@ -448,6 +448,8 @@ function gameOver() {
     ballsmTemp = 0;
     ballmdTemp = 0;
     coinsTemp = 0;
+    clearInterval(lifeBall);
+    $('#life-ball').css('display', 'none');
     showMoney();
 }
 
@@ -481,6 +483,8 @@ function newGame() {
         controllerMovement();
     }, controllersVelocity);
     idIterval = setInterval(draw, intervalVelocity);
+    let width = 0;
+    $('#bar-progress').css('width', width + "%");
     runingGame = true;
 }
 

@@ -306,7 +306,6 @@ label {
     margin-left: 15px;
 }
 
-
 .sum-ballcoins {
     display: inline-block;
     background-color: springgreen;
@@ -322,8 +321,15 @@ label {
     margin-left: 15px;
 }
 
-.progress {
 
+.title-progress {
+    text-align: center;
+    color: white;
+    font-size: x-small;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.progress {
     color: white;
     background-color: black;
     height: 20px;
