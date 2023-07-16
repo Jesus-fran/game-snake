@@ -39,6 +39,8 @@ let lastScore = 0;
 let intervalControllers = 0;
 let controllersVelocity = 30;
 let ballsLevel = 5;
+let mapCreated = false;
+let pixelCoordinates = []; //cords of map
 
 // Atributes snake
 let cords = [];
@@ -50,6 +52,7 @@ let bodyRadius = 7;
 let directionSnake = "";
 let arrVelocity = [170, 160, 150, 140, 130, 120, 100, 90, 80, 70, 60, 50, 40];
 let intervalVelocity = parseInt(localStorage.getItem('velocity'));
+// let intervalVelocity = 1000;
 $('#inputVelocity').val(arrVelocity.indexOf(intervalVelocity));
 
 //Atributes head snake
@@ -384,8 +387,76 @@ function levelCompleted() {
     showMoney();
 }
 
-function draw() {
+function drawMap() {
 
+    //Horizontal bar
+    lienzo.beginPath();
+    lienzo.moveTo(0, 250);
+    lienzo.lineTo(350, 250);
+    lienzo.lineWidth = 10;
+    lienzo.lineCap = "round";
+    lienzo.strokeStyle = "rgb(194, 131, 38)";
+    lienzo.fill();
+    lienzo.stroke();
+
+    lienzo.beginPath();
+    lienzo.moveTo(450, 250);
+    lienzo.lineTo(820, 250);
+    lienzo.stroke();
+
+    //Vertical bar
+    lienzo.beginPath();
+    lienzo.moveTo(400, 0);
+    lienzo.lineTo(400, 200);
+    lienzo.stroke();
+
+    lienzo.beginPath();
+    lienzo.moveTo(400, 300);
+    lienzo.lineTo(400, 500);
+    lienzo.stroke();
+
+    if (!mapCreated) {
+        // Get data pixels of canvas
+        let imageData = lienzo.getImageData(0, 0, Elementlienzo.width, Elementlienzo.height);
+        let pixels = imageData.data;
+
+        // Limits of canvas
+        let minX = Elementlienzo.width;
+        let maxX = 0;
+        for (let y = 0; y < Elementlienzo.height; y++) {
+            for (let x = 0; x < Elementlienzo.width; x++) {
+                let pixelIndex = (y * Elementlienzo.width + x) * 4; // Formula applied to calculate the position of the colors of that pixel.
+                if (pixels[pixelIndex + 3] > 0) {
+                    if (x < minX) {
+                        minX = x;
+                    }
+                    if (x > maxX) {
+                        maxX = x;
+                    }
+                }
+            }
+        }
+
+        // Store internal map coordinates
+        for (let y = 0; y < Elementlienzo.height; y++) {
+            for (let x = minX; x <= maxX; x++) {
+                let pixelIndex = (y * Elementlienzo.width + x) * 4;
+                if (pixels[pixelIndex + 3] > 0) {
+                    pixelCoordinates.push({ x: x, y: y });
+                }
+            }
+        }
+
+        // Mostrar las coordenadas internas en la consola
+        // console.log(pixelCoordinates);
+        mapCreated = true;
+    }
+}
+
+
+function draw() {
+    drawMap();
+    // return;
     drawBody();
 
     // If the snake did not eat a ball then it starts to run.
@@ -399,6 +470,14 @@ function draw() {
         numBody += 1;
         console.log("ONE BODY MORE!" + " TOTAL: " + numBody);
     }
+
+    // If the snake collides with  wall that divides
+    pixelCoordinates.forEach(element => {
+        if ((element['x'] - x) <= 2 && (element['x'] - x) >= -2 && (element['y'] - y <= 2) && (element['y'] - y >= -2)) {
+            gameOver();
+        }
+    });
+
     // If snake crashes into the wall
     if (x + dx > Elementlienzo.width || x + dx < 0) {
         gameOver();
@@ -478,7 +557,7 @@ function newGame() {
     console.log("new game!!");
     $('.game-over').css('display', 'none');
     resetGame();
-    setTimeout(drawBall, 500);
+    setTimeout(drawBall, 3000);
     intervalControllers = setInterval(() => {
         controllerMovement();
     }, controllersVelocity);
@@ -494,7 +573,7 @@ function startGame() {
     $('#new-score-summ').css('display', 'none');
     directionSnake = "right";
     eyesRadius = 2;
-    setTimeout(drawBall, 500);
+    setTimeout(drawBall, 3000);
     intervalControllers = setInterval(() => {
         controllerMovement();
     }, controllersVelocity);
