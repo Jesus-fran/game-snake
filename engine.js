@@ -557,7 +557,7 @@ function newGame() {
     console.log("new game!!");
     $('.game-over').css('display', 'none');
     resetGame();
-    setTimeout(drawBall, 3000);
+    setTimeout(drawBall, 500);
     intervalControllers = setInterval(() => {
         controllerMovement();
     }, controllersVelocity);
@@ -573,7 +573,7 @@ function startGame() {
     $('#new-score-summ').css('display', 'none');
     directionSnake = "right";
     eyesRadius = 2;
-    setTimeout(drawBall, 3000);
+    setTimeout(drawBall, 500);
     intervalControllers = setInterval(() => {
         controllerMovement();
     }, controllersVelocity);
