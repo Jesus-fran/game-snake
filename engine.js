@@ -212,6 +212,7 @@ function drawBall() {
     lienzo.beginPath();
     xBall = createCoords(810);
     yBall = createCoords(490);
+
     let typeBall = randomBall();
     if (typeBall == 0) {
         ballRadius = 10;
@@ -226,6 +227,12 @@ function drawBall() {
         ballColor = "springgreen";
         showLifeBall();
     }
+    pixelCoordinates.forEach(element => {
+
+        if ((element['x'] - xBall) <= ballRadius && (element['x'] - xBall) >= -ballRadius && (element['y'] - yBall <= ballRadius) && (element['y'] - yBall >= -ballRadius)) {
+            drawBall();
+        }
+    });
     lienzo.arc(xBall, yBall, ballRadius, 0, Math.PI * 2);
     lienzo.fillStyle = ballColor;
     lienzo.fill();
