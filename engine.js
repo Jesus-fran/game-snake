@@ -52,7 +52,6 @@ let bodyRadius = 7;
 let directionSnake = "";
 let arrVelocity = [170, 160, 150, 140, 130, 120, 100, 90, 80, 70, 60, 50, 40];
 let intervalVelocity = parseInt(localStorage.getItem('velocity'));
-// let intervalVelocity = 1000;
 $('#inputVelocity').val(arrVelocity.indexOf(intervalVelocity));
 
 //Atributes head snake
@@ -485,12 +484,17 @@ function draw() {
         }
     });
 
-    // If snake crashes into the wall
-    if (x + dx > Elementlienzo.width || x + dx < 0) {
-        gameOver();
+    // If snake into the empty then back in other position inverse
+    if (x > Elementlienzo.width + (bodyRadius * 2)) {
+        x = 0;
+    } else if (x < 0 - (bodyRadius * 2)) {
+        x = Elementlienzo.width;
     }
-    if (y + dy > Elementlienzo.height || y + dy < 0) {
-        gameOver();
+
+    if (y > Elementlienzo.height + (bodyRadius * 2)) {
+        y = 0;
+    } else if (y < 0 - (bodyRadius * 2)) {
+        y = Elementlienzo.height;
     }
 
     let cordsitem = [x, y];
