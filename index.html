@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Snake</title>
     <link rel="shortcut icon" href="assets/img/snake.png" type="image/x-icon">
-    <link rel="stylesheet" href="css.css">
+    <link rel="stylesheet" href="assets/css/css.css">
     <script src="assets/jquery-3.6.4.min.js"></script>
 </head>
 
@@ -19,12 +19,12 @@
 
         <div class="play-game">
             <h1 class="title-game-play">Play game</h1>
-            <button type="button" class="btn-play" id="btn-play" onclick="startGame()">Play</button>
+            <button type="button" class="btn-play" id="btn-play">Play</button>
         </div>
 
         <div class="pause-game">
             <h1 class="title-game-pause">Paused game</h1>
-            <button type="button" class="btn-resume" id="btn-resume" onclick="resumeGame()">Resume</button>
+            <button type="button" class="btn-resume" id="btn-resume">Resume</button>
         </div>
 
         <div class="game-over">
@@ -62,7 +62,7 @@
                     </tbody>
                 </table>
             </div>
-            <button type="button" class="btn-new" id="btn-new" onclick="newGame()">New game</button>
+            <button type="button" class="btn-new" id="btn-new">New game</button>
         </div>
 
         <div class="level-completed">
@@ -112,6 +112,5 @@
     </div>
     <footer></footer>
 </body>
-<script src="engine.js"></script>
-
+<script type="module" src="main.js"></script>
 </html>>
