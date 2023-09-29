@@ -325,7 +325,7 @@ label {
 .title-progress {
     text-align: center;
     color: white;
-    font-size: x-small;
+    font-size: small;
     font-family: 'Courier New', Courier, monospace;
 }
 
@@ -391,4 +391,28 @@ label {
     background-color: springgreen;
     text-decoration-line: underline;
     text-decoration-style: dashed;
+}
+
+.div-help {
+    color: white;
+    margin-top: 20%;
+    margin-left: 15px;
+    font-size: small;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.div-help li {
+    margin-bottom: 15px;
+}
+
+.div-help span {
+    padding: 5px;
+    border: 1px;
+    border-style: solid;
+}
+
+.title-help {
+    text-align: center;
+    font-size: small;
+    font-family: 'Courier New', Courier, monospace;
 }

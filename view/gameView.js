@@ -320,3 +320,13 @@ export function showLevelCompleted() {
 export function clearLienzo(x, y, width, height) {
     lienzo.clearRect(x, y, width, height);
 }
+
+export function showKeyPress(keyCode) {
+    $('#div-help span').each(function (index, element) {
+        $(element).css('color', 'white');
+        $(element).css('background-color', 'transparent');
+    });
+    $('#key' + keyCode).css('color', 'black');
+    $('#key' + keyCode).css('background-color', 'rgba(0, 255, 128, 0.644)');
+
+}

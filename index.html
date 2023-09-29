@@ -73,8 +73,10 @@
         <div class="settings">
             <h5 class="title-settings">Settings</h5>
             <label for="velocity">Dificulty:</label>
-            <input type="range" name="velocity" id="inputVelocity" value="6" min="0" max="12" onchange="changeVelocity(this)">
-            <button type="button" class="btnSaveSettings" id="btnSaveSettings" onclick="saveSettings(this)">Save</button>
+            <input type="range" name="velocity" id="inputVelocity" value="6" min="0" max="12"
+                onchange="changeVelocity(this)">
+            <button type="button" class="btnSaveSettings" id="btnSaveSettings"
+                onclick="saveSettings(this)">Save</button>
         </div>
         <canvas id="lienzo" class="lienzo" width="820" height="500">
             Su navegador no soporta el elemento canvas.
@@ -107,10 +109,22 @@
                     </div>
                 </div>
             </div>
+
+            <div class="div-help" id="div-help">
+                <h5 class="title-help">Help</h5>
+                <ul>
+                    <li><span id="key115">S</span> to start</li>
+                    <li><span id="key72">H</span> to left</li>
+                    <li><span id="key76">L</span> to right</li>
+                    <li><span id="key75">K</span> to up</li>
+                    <li><span id="key74">J</span> to down</li>
+                </ul>
+            </div>
         </div>
 
     </div>
     <footer></footer>
 </body>
 <script type="module" src="main.js"></script>
+
 </html>>

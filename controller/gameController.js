@@ -1,5 +1,5 @@
 import { addBalls, addBallsTemp, addScore, getBallsTemp, getLastScore, getScore, saveBalls, setBalls, setBallsTemp, setLastScore, setScore } from "../model/gameModel.js"
-import { showScore, drawBall, drawMap, drawBody, stopIntervalLifeBall, showSummary, showMoney, showGameOver, hideResumeGame, resetContLifeBall, xBall, ballRadius, yBall, drawHead, showNewGame, changeEyesRadius, viewStartGame, viewPauseGame, changeProgress, hideLifeBall, showLevelCompleted, clearLienzo } from "../view/gameView.js"
+import { showScore, drawBall, drawMap, drawBody, stopIntervalLifeBall, showSummary, showMoney, showGameOver, hideResumeGame, resetContLifeBall, xBall, ballRadius, yBall, drawHead, showNewGame, changeEyesRadius, viewStartGame, viewPauseGame, changeProgress, hideLifeBall, showLevelCompleted, clearLienzo, showKeyPress } from "../view/gameView.js"
 import { Elementlienzo, pixelCoordinates } from "../contexts/context.js"
 
 if (!localStorage.getItem('ballmd')) {
@@ -76,21 +76,25 @@ function controllerMovement() {
 }
 
 export function keydownHandler(e) {
-    if (e.keyCode == 39 && lastPressed != 37) {
+    if (e.keyCode == 76 && lastPressed != 72) {
         rightPressed = true;
-        lastPressed = 39;
+        lastPressed = 76;
+        showKeyPress(e.keyCode);
     }
-    else if (e.keyCode == 37 && lastPressed != 39) {
+    else if (e.keyCode == 72 && lastPressed != 76) {
         leftPressed = true;
-        lastPressed = 37;
+        lastPressed = 72;
+        showKeyPress(e.keyCode);
     }
-    else if (e.keyCode == 38 && lastPressed != 40) {
+    else if (e.keyCode == 75 && lastPressed != 74) {
         upPressed = true
-        lastPressed = 38;
+        lastPressed = 75;
+        showKeyPress(e.keyCode);
     }
-    else if (e.keyCode == 40 && lastPressed != 38) {
+    else if (e.keyCode == 74 && lastPressed != 75) {
         downPressed = true;
-        lastPressed = 40;
+        lastPressed = 74;
+        showKeyPress(e.keyCode);
     }
     else if ((e.keyCode == 32 || e.keyCode == 27) && runingGame) {
         // key to pause the game
@@ -105,17 +109,23 @@ export function keydownHandler(e) {
 }
 
 export function keyUpHandler(e) {
-    if (e.keyCode == 39) {
+    if (e.keyCode == 76) {
         rightPressed = false;
     }
-    else if (e.keyCode == 37) {
+    else if (e.keyCode == 72) {
         leftPressed = false;
     }
-    else if (e.keyCode == 38) {
+    else if (e.keyCode == 75) {
         upPressed = false;
     }
-    else if (e.keyCode == 40) {
+    else if (e.keyCode == 74) {
         downPressed = false;
+    }
+}
+
+export function keyPressHandler(e) {
+    if (e.keyCode == 115 && !runingGame) {
+        startGame();
     }
 }
 
