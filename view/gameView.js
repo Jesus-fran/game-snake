@@ -291,3 +291,7 @@ export function showNewGame() {
     $('#new-score-summ').css('display', 'none');
     $('#bar-progress').css('width', width + "%");
 }
+
+export function changeEyesRadius(radius){
+    eyesRadius = radius;
+}

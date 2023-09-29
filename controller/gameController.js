@@ -1,5 +1,5 @@
 import { addBalls, addBallsTemp, addScore, getBallsTemp, getLastScore, getScore, saveBalls, setBalls, setBallsTemp, setLastScore, setScore } from "../model/gameModel.js"
-import { showScore, drawBall, drawMap, drawBody, stopIntervalLifeBall, showSummary, showMoney, showGameOver, hideResumeGame, resetContLifeBall, xBall, ballRadius, yBall, drawHead, showNewGame } from "../view/gameView.js"
+import { showScore, drawBall, drawMap, drawBody, stopIntervalLifeBall, showSummary, showMoney, showGameOver, hideResumeGame, resetContLifeBall, xBall, ballRadius, yBall, drawHead, showNewGame, changeEyesRadius } from "../view/gameView.js"
 import { lienzo, Elementlienzo, pixelCoordinates } from "../contexts/context.js"
 
 if (!localStorage.getItem('ballmd')) {
@@ -125,7 +125,7 @@ export function startGame() {
     $('.play-game').css('display', 'none');
     $('#new-score-summ').css('display', 'none');
     directionSnake = "right";
-    eyesRadius = 2;
+    changeEyesRadius(2);
     setTimeout(function () {
         drawBall();
     }, 700);
@@ -231,7 +231,7 @@ function resetGame() {
     setScore(0);
     leftPressed = 0;
     directionSnake = "right";
-    eyesRadius = 2;
+    changeEyesRadius(2);
     clearInterval(intervalControllers);
     lienzo.clearRect(0, 0, Elementlienzo.width, Elementlienzo.height);
 }
@@ -303,7 +303,7 @@ function main() {
         let corx = cords[(cords.length - 1) - i][0];
         let cory = cords[(cords.length - 1) - i][1];
         if (x == corx && y == cory) {
-            eyesRadius = 3;
+            changeEyesRadius(3);
             gameOver();
         }
     }
