@@ -292,6 +292,31 @@ export function showNewGame() {
     $('#bar-progress').css('width', width + "%");
 }
 
-export function changeEyesRadius(radius){
+export function changeEyesRadius(radius) {
     eyesRadius = radius;
+}
+
+export function viewStartGame() {
+    $('.play-game').css('display', 'none');
+    $('#new-score-summ').css('display', 'none');
+}
+
+export function viewPauseGame() {
+    $('.pause-game').css('display', 'block');
+}
+
+export function changeProgress(width) {
+    $('#bar-progress').css('width', width + "%");
+}
+
+export function hideLifeBall() {
+    $('#life-ball').css('display', 'none');
+}
+
+export function showLevelCompleted() {
+    $('.level-completed').show('slow');
+}
+
+export function clearLienzo(x, y, width, height) {
+    lienzo.clearRect(x, y, width, height);
 }

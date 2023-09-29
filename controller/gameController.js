@@ -1,6 +1,6 @@
 import { addBalls, addBallsTemp, addScore, getBallsTemp, getLastScore, getScore, saveBalls, setBalls, setBallsTemp, setLastScore, setScore } from "../model/gameModel.js"
-import { showScore, drawBall, drawMap, drawBody, stopIntervalLifeBall, showSummary, showMoney, showGameOver, hideResumeGame, resetContLifeBall, xBall, ballRadius, yBall, drawHead, showNewGame, changeEyesRadius } from "../view/gameView.js"
-import { lienzo, Elementlienzo, pixelCoordinates } from "../contexts/context.js"
+import { showScore, drawBall, drawMap, drawBody, stopIntervalLifeBall, showSummary, showMoney, showGameOver, hideResumeGame, resetContLifeBall, xBall, ballRadius, yBall, drawHead, showNewGame, changeEyesRadius, viewStartGame, viewPauseGame, changeProgress, hideLifeBall, showLevelCompleted, clearLienzo } from "../view/gameView.js"
+import { Elementlienzo, pixelCoordinates } from "../contexts/context.js"
 
 if (!localStorage.getItem('ballmd')) {
     localStorage.setItem('ballmd', 0);
@@ -48,7 +48,6 @@ let bodyRadius = 7;
 let directionSnake = "";
 let arrVelocity = [170, 160, 150, 140, 130, 120, 100, 90, 80, 70, 60, 50, 40];
 let intervalVelocity = parseInt(localStorage.getItem('velocity'));
-$('#inputVelocity').val(arrVelocity.indexOf(intervalVelocity));
 
 let contBodies = 0;
 let numBody = 0;
@@ -122,9 +121,8 @@ export function keyUpHandler(e) {
 
 export function startGame() {
     console.debug("PLAYING!!");
-    $('.play-game').css('display', 'none');
-    $('#new-score-summ').css('display', 'none');
     directionSnake = "right";
+    viewStartGame();
     changeEyesRadius(2);
     setTimeout(function () {
         drawBall();
@@ -141,7 +139,7 @@ export function startGame() {
 export function pauseGame() {
     pausedGame = true;
     console.debug("IN PAUSE!");
-    $('.pause-game').css('display', 'block');
+    viewPauseGame();
     clearInterval(idIterval);
     stopIntervalLifeBall();
 }
@@ -182,7 +180,7 @@ function snakeEated() {
         const score = getScore()
         showScore(score);
         let width = (score * (100 / ballsLevel));
-        $('#bar-progress').css('width', width + "%");
+        changeProgress(width);
         const lastScore = getLastScore();
         if (lastScore < score) {
             setLastScore(score);
@@ -202,7 +200,7 @@ function snakeEated() {
         saveBalls();
         stopIntervalLifeBall();
         resetContLifeBall();
-        $('#life-ball').css('display', 'none');
+        hideLifeBall();
         drawBall();
     }
 }
@@ -211,7 +209,7 @@ function levelCompleted() {
     console.debug("LEVEL COMPLETED!");
     clearInterval(intervalControllers);
     clearInterval(idIterval);
-    $('.level-completed').show('slow');
+    showLevelCompleted();
     runingGame = false;
     lastPressed = 0;
     setScore(0);
@@ -233,7 +231,7 @@ function resetGame() {
     directionSnake = "right";
     changeEyesRadius(2);
     clearInterval(intervalControllers);
-    lienzo.clearRect(0, 0, Elementlienzo.width, Elementlienzo.height);
+    clearLienzo(0, 0, Elementlienzo.width, Elementlienzo.height);
 }
 
 export function newGame() {
@@ -258,7 +256,7 @@ function main() {
     // if the snake did not eat a ball then it starts to run.
     //access the first body that stayed as a tail and eliminates it.
     if (cords.length >= 3 && !eated) {
-        lienzo.clearRect(cords[contBodies][0] - bodyRadius, cords[contBodies][1] - bodyRadius, bodyRadius * 2, bodyRadius * 2);
+        clearLienzo(cords[contBodies][0] - bodyRadius, cords[contBodies][1] - bodyRadius, bodyRadius * 2, bodyRadius * 2)
         contBodies += 1;
     } else {
         eated = false;
